@@ -24,7 +24,6 @@ function connectDB () {
     options
   )
   mongoose.Promise = global.Promise
-  // Lấy kết nối mặc định
   var db = mongoose.connection
   db.on('error', () => console.log('Error'))
     .on('disconnected', () => {
