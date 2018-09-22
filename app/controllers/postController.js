@@ -3,7 +3,7 @@ var Posts = require('../models/post')
 exports.getPostById = (req, res) => {
   var id = req.params.postId
   console.log(id)
-  Posts.findById(id, function (err, post) {
+  Posts.findOne({ id: id }, function (err, post) {
     if (err) res.status(404).send('Not find post by Id')
     else res.json({ success: true, message: 'Success!', data: post })
   })
