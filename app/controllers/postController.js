@@ -38,6 +38,6 @@ exports.addPost = (req, res) => {
   post.content = req.body.content
   post.save(err => {
     if (err) res.status(500).send('Not save success' + err)
-    else res.json({ success: true, message: 'ADD_SUCCESS!' })
+    else res.status(200).json({ id: post.id })
   })
 }
