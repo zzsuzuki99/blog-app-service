@@ -1,4 +1,4 @@
 module.exports = {
   secret: 'zaloapis123',
-  database: 'mongodb://blog-app:quocnam123@ds117148.mlab.com:17148/blog-app'
+  database: 'mongodb://quocnam123:Zzsuzuki95@ds127129.mlab.com:27129/blog-app'
 }

@@ -7,7 +7,7 @@ var mongoose = require('mongoose')
 connectDB()
 
 app.use(bodyParser.json())
-// app.use(multer())
+// app.use(multer)
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(function (req, res, next) {

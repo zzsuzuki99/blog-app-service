@@ -1,3 +1,4 @@
+var utils = require('../utils')
 var Posts = require('../models/post')
 
 exports.getPostById = (req, res) => {
@@ -16,26 +17,12 @@ exports.getPosts = (req, res) => {
   })
 }
 
-const generateID = () => {
-  // Math.random should be unique because of its seeding algorithm.
-  // Convert it to base 36 (numbers + letters), and grab the first 9 characters
-  // after the decimal.
-  return (
-    '_' +
-    Math.random()
-      .toString(36)
-      .substr(2, 9)
-  )
-}
-
 exports.addPost = (req, res) => {
-  console.log('req>>>', req.body, generateID())
-  //   var id = req.params.postId
-  //   console.log(id)
   var post = new Posts()
-  post.id = generateID()
+  post.id = utils.generateID()
   post.title = req.body.title
   post.content = req.body.content
+  post.thumbnails = req.body.thumbnails
   post.save(err => {
     if (err) res.status(500).send('Not save success' + err)
     else res.status(200).json({ id: post.id })
