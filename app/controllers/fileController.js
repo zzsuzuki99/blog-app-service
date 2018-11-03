@@ -39,13 +39,14 @@ exports.sendFile = (req, res) => {
 }
 
 exports.getAllFile = (req, res) => {
-  const domainName = req.headers.host
+  var baseUrl = `${req.protocol}://${req.headers.host}`
+  console.log('BaseUrl>>>', baseUrl)
   Files.find({}, function (err, files) {
     if (err) res.status(404).send('Error>>>')
     else {
       res.status(200).json({
         data: files.map(file => ({
-          url: `${domainName}/api/file/${file.url}`
+          url: `${baseUrl}/api/file/${file.url}`
         }))
       })
     }
