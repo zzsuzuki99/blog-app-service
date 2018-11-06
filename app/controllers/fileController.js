@@ -10,6 +10,7 @@ var storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const fileName =
       file.fieldname + '-' + Date.now() + path.extname(file.originalname)
+    console.log('fileName>>', fileName)
     cb(null, fileName)
   }
 })
@@ -18,16 +19,18 @@ var upload = multer({ storage: storage }).single('file')
 
 exports.upload = (req, res) => {
   upload(req, res, err => {
-    const domainName = req.headers.host
+    var baseUrl = `${req.protocol}://${req.headers.host}`
+    // var baseUrl = 'https://blog-app-service.herokuapp.com'
     if (err) {
       res.status(500).send('Error>>>>', err)
     } else {
       var file = new Files()
       file.url = req.file.filename
       file.id = utils.generateID()
+      console.log('Response FileName>>>>', req.file.filename)
       file.save(err => {
         if (err) res.status(500).send('Error>>>>', err)
-        else res.status(200).json({ url: `${domainName}/api/file/${file.url}` })
+        else res.status(200).json({ url: `${baseUrl}/api/file/${file.url}` })
       })
       // res.status(200).send({})
     }
@@ -40,7 +43,7 @@ exports.sendFile = (req, res) => {
 
 exports.getAllFile = (req, res) => {
   var baseUrl = `${req.protocol}://${req.headers.host}`
-  console.log('BaseUrl>>>', baseUrl)
+  // var baseUrl = 'https://blog-app-service.herokuapp.com'
   Files.find({}, function (err, files) {
     if (err) res.status(404).send('Error>>>')
     else {

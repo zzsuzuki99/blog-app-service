@@ -24,7 +24,7 @@ app.get('/', function (req, res) {
 })
 
 app.use('/api', apiRoutes)
-app.listen(process.env.PORT || 3000)
+app.listen(process.env.PORT || 4000)
 
 function connectDB () {
   var options = { server: { socketOptions: { keepAlive: 1 } } }
